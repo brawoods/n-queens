@@ -198,56 +198,6 @@
       return false;
     },
 
-
-    //   let matrix = this.rows();
-    //   let counter = 0;
-    //   debugger;
-    //   var innerFunction = function (majorDiagonalColumnIndexAtFirstRow) {
-
-    //     let rowIndex = majorDiagonalColumnIndexAtFirstRow[0];
-    //     let columnIndex = majorDiagonalColumnIndexAtFirstRow[1];
-
-    //     // if matrix at rowIndex and columnIndex === 0
-    //     if (matrix[rowIndex][columnIndex] === 0) {
-    //       // call hasMajorDiagonalConflictAt with rowIndex + 1 and columnIndex + 1
-    //       if (matrix[rowIndex + 1][columnIndex + 1] === undefined) {
-    //         // call hasMajorDiagonalConflictAt with rowIndex + 1 and columnIndex + 1
-    //         return;
-    //       }
-    //       innerFunction([rowIndex + 1, columnIndex + 1]);
-    //     }
-
-    //     // if matrix at rowIndex and columnIndex === 1
-    //     if (matrix[rowIndex][columnIndex] === 1) {
-    //       // increase counter by 1
-    //       counter++;
-    //       // call hasMajorDiagonalConflictAt with rowIndex + 1 and columnIndex + 1
-    //       if (matrix[rowIndex + 1][columnIndex + 1] === undefined) {
-    //         // call hasMajorDiagonalConflictAt with rowIndex + 1 and columnIndex + 1
-    //         return;
-    //       }
-    //       innerFunction([rowIndex + 1, columnIndex + 1]);
-    //     }
-
-    //     // if the value at rowIndex + 1 and columnIndex + 1 equals undefined
-    //     // return false
-    //     // if (matrix[rowIndex][columnIndex] === undefined) {
-    //     //   // call hasMajorDiagonalConflictAt with rowIndex + 1 and columnIndex + 1
-    //     //   return;
-    //     // }
-    //   };
-    //   // invoke innerFunction();
-    //   innerFunction(majorDiagonalColumnIndexAtFirstRow);
-
-    //   // if counter is greater or equal to 2
-    //   // return true;
-    //   if (counter >= 2) {
-    //     return true;
-    //   }
-
-    //   return false;
-    // },
-
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function () {
       // iterate over the board starting at 1-n until the length of the board
@@ -264,41 +214,46 @@
       return false;
     },
 
-    // // return false; // fixme
-    // // set matrix variable
-    // let matrix = this.rows();
-    // // iterate through the matrix
-    // for (let i = 0; i < matrix.length; i++) {
-    //   // set conflict variable to hasMajorDiagonalConflictAt()
-    //   let row = matrix[i];
-    //   for (let j = 0; j < row.length; j++) {
-    //     // let indexes = [i, j];
-    //     // console.log('indexes: ', indexes);
-    //     let conflict = this.hasMajorDiagonalConflictAt([i, j]);
-    //     // console.log('conflict: ', conflict);
-    //     if (conflict) {
-    //       // return true
-    //       return true;
-    //     }
-    //   }
-    // }
-    // // return false
-    // return false;
-
-
-
-
     // Minor Diagonals - go from top-right to bottom-left
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
-    hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+    hasMinorDiagonalConflictAt: function(diagonalColumnIndex) {
+      // create counter variable at 0
+      let counter = 0;
+      // iterate through every row in the matrix
+      for (let i = 0; i < this.rows().length; i++) {
+        // if the value at the current column is 1
+        if (this.rows()[i][diagonalColumnIndex] === 1) {
+          // increase counter by 1
+          // if counter is greater than 1
+          // return true
+          counter++;
+          if (counter > 1) {
+            return true;
+          }
+        }
+        // increase column by 1
+        diagonalColumnIndex--;
+      }
+      // return false
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      // iterate over the board starting at 1-n until the length of the board
+      let column = this.rows()[0].length + this.rows()[0].length - 1;
+      for (column; column >= 0; column--) {
+        // invoke helper function with index of first row
+        // if this is true
+        if (this.hasMinorDiagonalConflictAt(column)) {
+          // return true
+          return true;
+        }
+      }
+      // return false
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
