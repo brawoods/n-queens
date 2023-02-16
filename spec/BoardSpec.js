@@ -42,7 +42,7 @@ describe('Board', function() {
       [0, 0, 0, 0]
     ];
     var board = new Board(matrix);
-
+    // debugger;
     it('should find a row conflict', function() {
       expect(board.hasAnyRowConflicts()).to.be.equal(true);
     });
