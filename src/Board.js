@@ -122,12 +122,51 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      // return false; // fixme
+      // set first variable
+      let first = null;
+      // set row variable
+      let matrix = this.rows();
+      // iterate through row variable
+      for (let i = 0; i < matrix.length; i++) {
+        // set rook variable
+        let rook = matrix[i][colIndex];
+        // if rook is 1 and first is null
+        if (rook === 1 && first === null) {
+          // change first to 1
+          first = 1;
+        } else {
+        // else
+          // if rook is 1 and first is truthy
+          if (rook === 1 && first) {
+            // return true
+            return true;
+          }
+        }
+        // return false
+      }
+      return false;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      // return false; // fixme
+      // set matrix variable
+      let matrix = this.rows();
+      // iterate through the matrix
+      // debugger;
+      for (let i = 0; i < matrix.length; i++) {
+        // debugger;
+        // set conflict variable in the loop
+        let conflict = this.hasColConflictAt(i);
+        // check if conflict is truthy
+        if (conflict) {
+          // return true
+          return true;
+        }
+      }
+      // return false
+      return false;
     },
 
 
